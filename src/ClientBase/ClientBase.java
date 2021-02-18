@@ -24,7 +24,7 @@ public class ClientBase {
         System.out.println("Apertura connessione");
         try {
             while (true) {
-                Socket server = new Socket("127.0.0.1", 6666);
+                Socket server = new Socket("127.0.0.1", 5500);
                 InputStream dalServer = server.getInputStream();
                 BufferedReader lettore = new BufferedReader(new InputStreamReader(dalServer));
 
