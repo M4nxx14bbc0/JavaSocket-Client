@@ -33,19 +33,20 @@ public class ClientBase {
             BufferedWriter scrittore = new BufferedWriter(new OutputStreamWriter(alServer));
             Scanner sc = new Scanner(System.in);
             
-            String input = ""; 
+            String input = "", risposta = ""; 
             
             while (!input.equalsIgnoreCase("exit")) {
                 System.out.println("Testo : ");
-                String risposta = sc.nextLine();
+                input = sc.nextLine();
+                scrittore.write(input);
 
                 System.out.println("Risposta del server : "+risposta);
                 lettore.close();
                 server.close();
-
-                System.out.println("Chiusura connessione !");
-                Thread.sleep(5000);
             }
+            
+            System.out.println("Chiusura connessione !");
+            Thread.sleep(5000);
         } catch (InterruptedException interrupt) {
             Logger.getLogger(ClientBase.class.getName()).log(Level.SEVERE, null, interrupt);
         } catch (IOException ex) {
