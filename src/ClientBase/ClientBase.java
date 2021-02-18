@@ -48,9 +48,7 @@ public class ClientBase {
             System.out.println("Chiusura connessione !");
             Thread.sleep(5000);
         } catch (InterruptedException interrupt) {
-            Logger.getLogger(ClientBase.class.getName()).log(Level.SEVERE, null, interrupt);
         } catch (IOException ex) {
-            Logger.getLogger(ClientBase.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
