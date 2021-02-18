@@ -7,6 +7,7 @@ package ClientBase;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,12 +24,20 @@ public class ClientBase {
     public static void main(String[] args){
         System.out.println("Apertura connessione");
         try {
-            while (true) {
-                Socket server = new Socket("127.0.0.1", 5500);
-                InputStream dalServer = server.getInputStream();
-                BufferedReader lettore = new BufferedReader(new InputStreamReader(dalServer));
-
-                String risposta = lettore.readLine();
+            Socket server = new Socket("127.0.0.1", 5500);
+            
+            InputStream dalServer = server.getInputStream();
+            OutputStream alServer = server.getOutputStream();
+            
+            BufferedReader lettore = new BufferedReader(new InputStreamReader(dalServer));
+            BufferedWriter scrittore = new BufferedWriter(new OutputStreamWriter(alServer));
+            Scanner sc = new Scanner(System.in);
+            
+            String input = ""; 
+            
+            while (!input.equalsIgnoreCase("exit")) {
+                System.out.println("Testo : ");
+                String risposta = sc.nextLine();
 
                 System.out.println("Risposta del server : "+risposta);
                 lettore.close();
