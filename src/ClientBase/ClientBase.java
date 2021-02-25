@@ -25,31 +25,29 @@ public class ClientBase {
         System.out.println("Apertura connessione");
         try {
             Socket server = new Socket("127.0.0.1", 5500);
-            
-            InputStream dalServer = server.getInputStream();
-            OutputStream alServer = server.getOutputStream();
-            
-            BufferedReader lettore = new BufferedReader(new InputStreamReader(dalServer));
-            BufferedWriter scrittore = new BufferedWriter(new OutputStreamWriter(alServer));
+            BufferedReader lettore = new BufferedReader(new InputStreamReader(server.getInputStream()));
+            PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
             Scanner sc = new Scanner(System.in);
-            
-            String input = "", risposta = ""; 
-            
+            String input = ""; 
             while (!input.equalsIgnoreCase("exit")) {
-                System.out.println("Testo : ");
+                System.out.print("Testo : ");
                 input = sc.nextLine();
                 scrittore.write(input);
-
+                scrittore.flush();
+                
+                String risposta = lettore.readLine();
                 System.out.println("Risposta del server : "+risposta);
-                lettore.close();
-                server.close();
-            }
+                System.out.println("Hai inserito "+risposta.split(": ")[1] + "caratteri");
             
+            }
+            lettore.close();
+            server.close();
+
             System.out.println("Chiusura connessione !");
             Thread.sleep(5000);
         } catch (InterruptedException interrupt) {
         } catch (IOException ex) {
+            Logger.getLogger(ClientBase.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 }
