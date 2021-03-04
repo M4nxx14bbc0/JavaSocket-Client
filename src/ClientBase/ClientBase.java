@@ -25,17 +25,15 @@ public class ClientBase {
         System.out.println("Apertura connessione");
         try {
             Socket server = new Socket("127.0.0.1", 5500);
-            BufferedReader lettore = new BufferedReader(new InputStreamReader(server.getInputStream()));
             PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
             Scanner sc = new Scanner(System.in);
+            
             int input = 0; 
             System.out.print("Testo : ");
             input = sc.nextInt();
             scrittore.write(input);
             scrittore.flush();
             
-            System.out.println("Risultato : "+lettore.readLine());
-            lettore.close();
             server.close();
 
             System.out.println("Chiusura connessione !");
