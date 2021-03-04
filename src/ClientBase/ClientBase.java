@@ -31,7 +31,8 @@ public class ClientBase {
             int input = 0; 
             System.out.print("Testo : ");
             input = sc.nextInt();
-            scrittore.write(input);
+            String write = "" +input;
+            scrittore.write(write);
             scrittore.flush();
             
             server.close();
