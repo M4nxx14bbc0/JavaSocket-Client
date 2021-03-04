@@ -28,18 +28,13 @@ public class ClientBase {
             BufferedReader lettore = new BufferedReader(new InputStreamReader(server.getInputStream()));
             PrintWriter scrittore = new PrintWriter(server.getOutputStream(), true);
             Scanner sc = new Scanner(System.in);
-            String input = ""; 
-            while (!input.equalsIgnoreCase("exit")) {
-                System.out.print("Testo : ");
-                input = sc.nextLine();
-                scrittore.write(input);
-                scrittore.flush();
-                
-                String risposta = lettore.readLine();
-                System.out.println("Risposta del server : "+risposta);
-                System.out.println("Hai inserito "+risposta.split(": ")[1] + "caratteri");
+            int input = 0; 
+            System.out.print("Testo : ");
+            input = sc.nextInt();
+            scrittore.write(input);
+            scrittore.flush();
             
-            }
+            System.out.println("Risultato : "+lettore.readLine());
             lettore.close();
             server.close();
 
